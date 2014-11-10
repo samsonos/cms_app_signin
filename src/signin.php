@@ -7,7 +7,8 @@
  */
 use samson\social\email\EmailStatus;
 
-class SignIn extends \samson\cms\App
+/**   */
+class SignIn extends \samson\core\CompressableExternalModule
 {
 
     public $id = 'signin';
