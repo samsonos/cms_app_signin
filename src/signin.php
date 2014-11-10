@@ -14,14 +14,19 @@ class SignIn extends \samson\core\CompressableExternalModule
 
     public $id = 'signin';
 
-    /** Check the user's authorization */
-    public function __HANDLER()
+    public static function authorize()
     {
         if (!m('social')->authorized()) {
             if (!url()->is('signin')) {
                 url()->redirect('signin');
             }
         }
+    }
+
+    /** Check the user's authorization */
+    public function __HANDLER()
+    {
+        self::authorize();
     }
 
     /** Main sign in template */
