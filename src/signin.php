@@ -27,9 +27,9 @@ class SignIn extends \samson\core\CompressableExternalModule
     /** Main sign in template */
     public function __base()
     {
-        s()->template('app/view/signin/signin_template.php');
+        s()->template('www/signin/signin_template.vphp');
         $result = '';
-        $result .= m()->view('signin/signin_form.php')->output();
+        $result .= m()->view('www/signin/signin_form.vphp')->output();
         m()->html($result)->title('Авторизация');
     }
 
@@ -46,18 +46,18 @@ class SignIn extends \samson\core\CompressableExternalModule
                 if (dbQuery('user')->cond('UserID', $user->id)->first()) {
                     return array('status' => '1');
                 } else {
-                    $error .= m()->view('signin/signin_form.php')->errorClass('errorAuth')->output();
+                    $error .= m()->view('www/signin/signin_form.vphp')->errorClass('errorAuth')->output();
                     return array('status' => '0', 'html' => $error);
                 }
             } else {
-                $error .= m()->view('signin/signin_form.php')
+                $error .= m()->view('www/signin/signin_form.vphp')
                     ->errorClass('errorAuth')
                     ->userEmail("{$_POST['email']}")
                     ->output();
                 return array('status' => '0', 'html' => $error);
             }
         } else {
-            $error .= m()->view('signin/signin_form')->errorClass('errorAuth')->output();
+            $error .= m()->view('www/signin/signin_form')->errorClass('errorAuth')->output();
             return array('status' => '0', 'html' => $error);
         }
     }
@@ -73,8 +73,8 @@ class SignIn extends \samson\core\CompressableExternalModule
     public function __passrecovery()
     {
         $result = '';
-        $result .= m()->view('signin/pass_recovery_form')->output();
-        s()->template('app/view/signin/signin_template.php');
+        $result .= m()->view('www/signin/pass_recovery_form')->output();
+        s()->template('www/signin/signin_template.vphp');
         m()->html($result)->title('Восстановление пароля');
     }
 
@@ -88,12 +88,12 @@ class SignIn extends \samson\core\CompressableExternalModule
             if (dbQuery('user')->Email($_POST['email'])->first($user)) {
                 $user->confirmed = md5(generate_password(20) . time());
                 $user->save();
-                $message = m()->view('signin/email/pass_recovery')->code($user->confirmed)->output();
+                $message = m()->view('www/signin/email/pass_recovery')->code($user->confirmed)->output();
 
                 mail_send($user->Email, 'info@samsonos.com', $message, t('Восстановление пароля!', true), 'SamsonCMS');
 
-                $result .= m()->view('signin/pass_recovery_mailsend')->output();
-                s()->template('app/view/signin/signin_template.php');
+                $result .= m()->view('www/signin/pass_recovery_mailsend')->output();
+                s()->template('www/signin/signin_template.vphp');
                 m()->html($result)->title('Восстановление пароля');
             } else {
                 url()->redirect();
@@ -111,8 +111,8 @@ class SignIn extends \samson\core\CompressableExternalModule
     {
         if (dbQuery('user')->confirmed($code)->first()) {
             $result = '';
-            $result .= m()->view('signin/new_pass_form')->code($code)->output();
-            s()->template('app/view/signin/signin_template.php');
+            $result .= m()->view('www/signin/new_pass_form')->code($code)->output();
+            s()->template('www/signin/signin_template.vphp');
             m()->html($result)->title('Восстановление пароля');
         } else {
             e404();
@@ -139,8 +139,8 @@ class SignIn extends \samson\core\CompressableExternalModule
             }
         } else {
             $result = '';
-            $result .= m()->view('signin/pass_error')->message(t('Вы ввели некорректный пароль либо пароли не совпадают', true))->output();
-            s()->template('app/view/signin/signin_template.php');
+            $result .= m()->view('www/signin/pass_error')->message(t('Вы ввели некорректный пароль либо пароли не совпадают', true))->output();
+            s()->template('www/signin/signin_template.vphp');
             m()->html($result)->title('Ошибка восстановление пароля');
         }
     }
