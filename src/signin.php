@@ -5,6 +5,7 @@
  * Date: 20.10.2014
  * Time: 11:43
  */
+namespace samson\cms\signin;
 use samson\social\email\EmailStatus;
 
 /**   */

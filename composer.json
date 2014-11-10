@@ -16,7 +16,7 @@
     "autoload": {
         "classmap": ["src/"],
         "psr-0": {
-            "samson\\cms\\web\\product": "src/"
+            "samson\cms\signin;": "src/"
         }
     }
 }
