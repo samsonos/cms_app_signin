@@ -42,11 +42,15 @@ class SignIn extends \samson\core\CompressableExternalModule
     public function __async_login()
     {
         $user = null;
+        $remember = false;
         $error = '';
         if (isset($_POST['email']) && isset($_POST['password'])) {
             $email = md5($_POST['email']);
             $password = md5($_POST['password']);
-            $auth = m('socialemail')->authorizeWithEmail($email, $password, $user);
+            if (isset($_POST['remember'])) {
+                $remember = true;
+            }
+            $auth = m('socialemail')->authorizeWithEmail($email, $password, $remember, $user);
             if ($auth->code == EmailStatus::SUCCESS_EMAIL_AUTHORIZE) {
                 if (dbQuery('user')->cond('UserID', $user->id)->first()) {
                     return array('status' => '1');
@@ -130,7 +134,8 @@ class SignIn extends \samson\core\CompressableExternalModule
      */
     public function __recovery($code)
     {
-        if (isset($_POST['password']) && isset($_POST['confirm_password']) && $_POST['password'] == $_POST['confirm_password']) {
+        if (isset($_POST['password']) && isset($_POST['confirm_password'])
+            && $_POST['password'] == $_POST['confirm_password']) {
             /** @var \samson\activerecord\user $user */
             $user = null;
             if (dbQuery('user')->confirmed($code)->first($user)) {
@@ -138,13 +143,16 @@ class SignIn extends \samson\core\CompressableExternalModule
                 $user->md5_password = md5($_POST['password']);
                 $user->Password = $_POST['password'];
                 $user->save();
-                if (m('socialemail')->authorizeWithEmail($user->md5_email, $user->md5_password, $user)->code == EmailStatus::SUCCESS_EMAIL_AUTHORIZE) {
+                if (m('socialemail')->authorizeWithEmail($user->md5_email, $user->md5_password, $user)
+                                    ->code == EmailStatus::SUCCESS_EMAIL_AUTHORIZE) {
                     url()->redirect();
                 }
             }
         } else {
             $result = '';
-            $result .= m()->view('www/signin/pass_error')->message(t('Вы ввели некорректный пароль либо пароли не совпадают', true))->output();
+            $result .= m()->view('www/signin/pass_error')
+                          ->message(t('Вы ввели некорректный пароль либо пароли не совпадают', true))
+                          ->output();
             s()->template('www/signin/signin_template.vphp');
             m()->html($result)->title('Ошибка восстановление пароля');
         }
