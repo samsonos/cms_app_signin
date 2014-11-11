@@ -18,7 +18,7 @@ s('.main-form').pageInit(function(form){
         } else {
             preloader.hide();
             button.show();
-            document.location.href = "../";
+            document.location.href = "/cms";
         }
     });
 });
@@ -43,7 +43,7 @@ function formSubm(){
         } else {
             preloader.hide();
             button.show();
-            document.location.href = "../";
+            document.location.href = "/cms";
         }
     });
 }
