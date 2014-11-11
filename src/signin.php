@@ -8,7 +8,12 @@
 namespace samson\cms\signin;
 use samson\social\email\EmailStatus;
 
-/**   */
+/**
+ * Generic class for user sign in
+ * @author Olexandr Nazarenko <nazarenko@samsonos.com>
+ * @copyright 2014 SamsonOS
+ * @version 0.0.1
+ */
 class SignIn extends \samson\core\CompressableExternalModule
 {
 
@@ -17,8 +22,14 @@ class SignIn extends \samson\core\CompressableExternalModule
     public static function authorize()
     {
         if (!m('social')->authorized()) {
-            if (!url()->is('signin')) {
-                url()->redirect('signin');
+            if (!m('socialemail')->cookieVerification()) {
+                if (!url()->is('signin')) {
+                    url()->redirect('signin');
+                }
+            }
+        } else {
+            if (url()->is('signin')) {
+                url()->redirect();
             }
         }
     }
