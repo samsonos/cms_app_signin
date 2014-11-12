@@ -26,6 +26,8 @@ class SignIn extends \samson\core\CompressableExternalModule
                 if (!url()->is('signin')) {
                     url()->redirect('signin');
                 }
+            } else {
+                url()->redirect('signin');
             }
         } else {
             if (url()->is('signin')) {
@@ -43,6 +45,7 @@ class SignIn extends \samson\core\CompressableExternalModule
     /** Main sign in template */
     public function __base()
     {
+       // m('social')->prepare();
         s()->template('www/signin/signin_template.vphp');
         $result = '';
         $result .= m()->view('www/signin/signin_form.vphp')->output();
