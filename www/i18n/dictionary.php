@@ -1,4 +1,5 @@
 <?php
+/*
 function dictionary()
 {
     return array(
@@ -245,3 +246,4 @@ function dictionary()
         ),
     );
 }
+*/
