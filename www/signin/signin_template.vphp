@@ -10,7 +10,7 @@
 
 <body id="<?php v('id'); ?>" class="signin">
 
-<?php m('i18n')->render('list')?>
+<?php //m('i18n')->render('list')?>
 
 <div class="container">
     <?php m()->render() ?>
