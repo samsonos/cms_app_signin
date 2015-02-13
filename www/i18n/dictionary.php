@@ -147,15 +147,16 @@ function dictionary()
             "Дополнительные поля"	=>	"Additional",
             "Галлерея"	=>	"Gallery",
             "Запомнить меня" =>	"Remember me",
-            "Восстановление пароля"  => "Recovery password",
+            "Восстановление пароля"  => "Password recovery",
             "Отправить" => "Send",
             "Ошибка" => "Error",
             "Попробовать снова" => "Try again",
+            "Вернуться" => "Back",
             "Пользователя с таким email адресом не существует. Проверьте Ваши данные или зарегистрируйтесь." => "Users with the email address does not exist. Check your data or register.",
             "Вам выслана ссылка на восстановление пароля" => "You will receive a link to the password recovery",
             "Вы ввели некорректный пароль либо пароли не совпадают" => "You have entered an incorrect password or passwords do not match",
             "В скором времени на указанную Вами почту придет письмо со ссылкой на восстановление пароля" => "In a short time you specified mail a letter with reference to the password recovery",
-            "На введенный Вами email будет выслано сообщение с дальнейшими инструкциями." => "On your email will be sent a message with further instructions."
+            "На введенный Вами email будет выслано сообщение с дальнейшими инструкциями." => "We will send you an email with further instructions."
         ),
         "ru"	=>array(
             "На главную"	=>	"",

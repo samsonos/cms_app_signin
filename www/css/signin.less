@@ -1,5 +1,5 @@
 body.signin{
-  position: relative;
+  position: absolute;
   top: 0;
   .preloader_container{
     display: none;
@@ -97,16 +97,17 @@ body.signin{
       margin-bottom: 10px;
       font-weight: normal;
       position: relative;
-      display: block;
       min-height: 20px;
-      margin-top: 10px;
+      margin-top: 5px;
+      margin-left: 5px;
       max-width: 100%;
       font-family: "Tahoma";
       font-size: 13px;
       color: #000;
+      display: inline-block;
       input{
         position: absolute;
-        margin: 4px 0 0 -20px;
+        margin: -1px 0 0 -25px;
         letter-spacing: normal;
         word-spacing: normal;
         text-transform: none;
@@ -114,9 +115,15 @@ body.signin{
         text-shadow: none;
         display: inline-block;
         text-align: start;
-        height: 13px;
-        width: 13px;
+        height: 20px;
+        width: 20px;
       }
+    }
+    a{
+      color: #428bca;
+      display: inline-block;
+      float: right;
+      margin: 5px 0 10px;
     }
     .btn-signin{
       background-color: #65c23a;
@@ -133,9 +140,9 @@ body.signin{
       border: 1px solid transparent;
       display: block;
       width: 100%;
-    }
-    a{
-      color: #428bca;
+      &:hover{
+        opacity: 0.8;
+      }
     }
     &.errorAuth{
       input{
@@ -144,6 +151,24 @@ body.signin{
           border-color: red;
         }
       }
+    }
+    .recovery-email{
+      margin: 0;
+    }
+    .btn-recovery{
+      display: inline-block;
+      width: 220px;
+    }
+    .btn-back{
+      display: inline-block;
+      width: 100px;
+      position: relative;
+      float: right;
+      background-color: #04c;
+      text-align: center;
+      padding: 10px 0;
+      margin: 0;
+
     }
   }
 }
