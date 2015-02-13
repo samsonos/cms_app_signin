@@ -15,8 +15,8 @@
         <label class="checkbox">
             <input type="checkbox" name="remember"> <?php t('Запомнить меня') ?>
         </label>
+        <a href="<?php url_base('signin', 'passrecovery') ?>"><?php t('Восстановление пароля') ?></a>
         <div class="preloader_container"><div class="preloader"></div></div>
         <button class="btn btn-lg btn-signin btn-block" type="submit"><?php t('Войти') ?></button>
-        <a href="<?php url_base('signin', 'passrecovery') ?>"><?php t('Восстановление пароля') ?></a>
     </form>
 </div>
