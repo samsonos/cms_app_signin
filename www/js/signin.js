@@ -23,6 +23,8 @@ s('.main-form').pageInit(function(form){
     });
 });
 
+s('body.signin').pageInit(list());
+
 /**
  * Assignment Ajax event
  */
@@ -30,6 +32,7 @@ function formSubm(){
     var form = s('.main-form');
     var preloader = s('.preloader_container');
     var button = s('button.btn-signin');
+    list();
     form.ajaxSubmit(function(response){
         preloader.show();
         button.hide();
@@ -52,7 +55,7 @@ function formSubm(){
  * Form animation with invalid authorization
  */
 function formShake(){
-    var container = s('.form-container');
+    var container = s('.form-container.form-signin');
     container.css('left', '20px');
     container.animate(40, 'left', '50', function(){
         container.animate(0, 'left', '25', function(){
@@ -62,5 +65,21 @@ function formShake(){
                 });
             });
         });
+    });
+}
+
+/**
+ * Slide recovery or signin form
+ */
+function list(){
+
+    var container = s('body.signin');
+
+    s('a.passrecovery').click(function(){
+        container.left('100%');
+    });
+
+    s('.btn-back').click(function(){
+        container.left('0');
     });
 }
