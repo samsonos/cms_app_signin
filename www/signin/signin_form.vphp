@@ -10,7 +10,7 @@
 <div class="form-container form-signin">
     <form method="POST" action="<?php url_base('signin/login'); ?>" class="form-signin main-form recovery <?php iv('errorClass') ?>" role="form">
         <h2 class="form-signin-heading"><?php t('Авторизация') ?></h2>
-        <input type="email" name="email" class="form-control" placeholder="<?php t('E-mail') ?>" value="<?php iv('userEmail') ?>" required="">
+        <input type="email" name="email" class="form-control" placeholder="<?php t('Email') ?>" value="<?php iv('userEmail') ?>" required="">
         <input type="password" name="password" class="form-control" placeholder="<?php t('Пароль') ?>" required="">
         <label class="checkbox">
             <input type="checkbox" name="remember"> <?php t('Запомнить меня') ?>
@@ -25,11 +25,12 @@
     <form class="signin-pages" method="post" action="<?php url_base('signin', 'mail') ?>">
         <fieldset>
             <h2><?php t('Восстановление пароля') ?></h2>
-            <input type="email" class="input-medium form-control recovery-email" placeholder="Enter your Email" name="email" required>
-            <br>
-            <button type="submit" class="btn btn-signin btn-recovery"><?php t('Отправить') ?></button>
-            <a class="btn btn-signin btn-back"><?php t('Вернуться') ?></a>
-            <span class="help-block"><?php t('На введенный Вами email будет выслано сообщение с дальнейшими инструкциями.') ?></span>
+            <input type="email" class="input-medium form-control recovery-email" placeholder="Введите Ваш Email" name="email" required>
+            <span class="help-block recovery-msg"><?php t('На введенный Вами email будет выслано сообщение с дальнейшими инструкциями.') ?></span>
+            <div class="recovery-btns">
+                <a class="btn btn-signin btn-back"><?php t('Вернуться') ?></a>
+                <button type="submit" class="btn btn-signin btn-recovery"><?php t('Отправить') ?></button>
+            </div>
         </fieldset>
     </form>
 </div>
