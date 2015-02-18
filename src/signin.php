@@ -92,15 +92,6 @@ class SignIn extends \samson\core\CompressableExternalModule
         url()->redirect();
     }
 
-    /** Main password recovery template */
-    public function __passrecovery()
-    {
-        $result = '';
-        $result .= m()->view('www/signin/pass_recovery_form')->output();
-        s()->template('www/signin/signin_template.vphp');
-        m()->html($result)->title('Восстановление пароля');
-    }
-
     /** Sending email with the correct address */
     public function __mail()
     {

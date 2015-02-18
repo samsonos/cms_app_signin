@@ -138,7 +138,7 @@ function dictionary()
             "Выполняется вход.."	=>	"Logging in, please wait...",
             "Войти в систему"	=>	"Enter",
             "Система управления сайтом - SamsonCMS"	=>	"CMS",
-            "Введите свой E-mail"	=>	"Enter your email (login)",
+            "Введите Ваш Email"	=>	"Enter your Email",
             "Далее"	=>	"Next",
             "Введите свой пароль"	=>	"Enter your password",
             "Пароль"	=>	"Password",
