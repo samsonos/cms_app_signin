@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title><?php v('title'); ?> - SamsonCMS</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="content-language" content="ru" />
-    <link rel="icon" type="image/png" href="favicon.png" >
-</head>
+    <head>
+        <title><?php v('title'); ?> - SamsonCMS</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-language" content="ru" />
+        <link rel="icon" type="image/png" href="favicon.png" >
+    </head>
 
-<body id="<?php v('id'); ?>" class="signin">
+    <body id="<?php v('id'); ?>" class="signin">
 
-<?php //m('i18n')->render('list')?>
+        <input id="signin_redirect_url" type="hidden" value="<?php echo __SAMSON_BASE__?>">
 
-<div class="container">
-    <?php m()->render() ?>
-</div>
+        <div class="container">
+            <?php m()->render() ?>
+        </div>
 
-</body>
+    </body>
 </html>

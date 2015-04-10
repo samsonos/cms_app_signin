@@ -18,7 +18,7 @@ s('.main-form').pageInit(function(form){
         } else {
             preloader.hide();
             button.show();
-            document.location.href = "/cms";
+            document.location.href = s('#signin_redirect_url').val();
         }
     });
 });
