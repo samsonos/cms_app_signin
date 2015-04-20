@@ -7,6 +7,7 @@
  */
 namespace samson\cms\signin;
 use samson\social\email\EmailStatus;
+use samsonphp\event\Event;
 
 /**
  * Generic class for user sign in
@@ -67,6 +68,8 @@ class SignIn extends \samson\core\CompressableExternalModule
             $auth = m('socialemail')->authorizeWithEmail($email, $password, $remember, $user);
             if ($auth->code == EmailStatus::SUCCESS_EMAIL_AUTHORIZE) {
                 if (dbQuery('user')->cond('UserID', $user->id)->first()) {
+                    // Fire login success event
+                    Event::fire('samson.cms.signin.login', array(& $user));
                     return array('status' => '1');
                 } else {
                     $error .= m()->view('www/signin/signin_form.vphp')->errorClass('errorAuth')->output();
@@ -89,6 +92,8 @@ class SignIn extends \samson\core\CompressableExternalModule
     public function __logout()
     {
         m('socialemail')->deauthorize();
+        // Fire logout event
+        Event::fire('samson.cms.signin.logout');
         url()->redirect();
     }
 
