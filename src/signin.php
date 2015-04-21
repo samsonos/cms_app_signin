@@ -67,7 +67,7 @@ class SignIn extends \samson\core\CompressableExternalModule
             }
             $auth = m('socialemail')->authorizeWithEmail($email, $password, $remember, $user);
             if ($auth->code == EmailStatus::SUCCESS_EMAIL_AUTHORIZE) {
-                if (dbQuery('user')->cond('UserID', $user->id)->first()) {
+                if (dbQuery('user')->cond('user_id', $user->id)->first()) {
                     // Fire login success event
                     Event::fire('samson.cms.signin.login', array(& $user));
                     return array('status' => '1');
@@ -104,7 +104,7 @@ class SignIn extends \samson\core\CompressableExternalModule
             /** @var \samson\activerecord\user $user */
             $user = null;
             $result = '';
-            if (dbQuery('user')->Email($_POST['email'])->first($user)) {
+            if (dbQuery('user')->email($_POST['email'])->first($user)) {
                 $user->confirmed = md5(generate_password(20) . time());
                 $user->save();
                 $message = m()->view('www/signin/email/pass_recovery')->code($user->confirmed)->output();
