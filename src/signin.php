@@ -50,7 +50,7 @@ class SignIn extends \samson\core\CompressableExternalModule
         s()->template('www/signin/signin_template.vphp');
         $result = '';
         $result .= m()->view('www/signin/signin_form.vphp')->output();
-        m()->html($result)->title('Авторизация');
+        m()->html($result)->title(t('Авторизация', true));
     }
 
     /** User asynchronous sign in */
