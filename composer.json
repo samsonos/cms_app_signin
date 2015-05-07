@@ -2,8 +2,7 @@
     "name":"samsonos/cms_app_signin",
     "description":"SamsonCMS Sign In",
     "author":"Olexandr Nazarenko <nazarenko@samsonos.com>",
-    "require":{
-        "samsonos/cms_app":"*",
+    "require":{        
         "samsonos/php_core":"*",
         "samsonos/php_activerecord":"*",
         "samsonos/php_i18n":"*",
@@ -11,6 +10,7 @@
         "samsonos/social_core":"*",
         "samsonos/social_email":"*"
     },
+	"minimum-stability":"dev",
     "license":"Open Software License (OSL) v 3.0",
     "homepage":"http://samsonos.com/",
     "autoload": {
