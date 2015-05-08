@@ -50,7 +50,7 @@ class SignIn extends \samson\core\CompressableExternalModule
         s()->template('www/signin/signin_template.vphp');
         $result = '';
         $result .= m()->view('www/signin/signin_form.vphp')->output();
-        m()->html($result)->title('Авторизация');
+        m()->html($result)->title(t('Авторизация', true));
     }
 
     /** User asynchronous sign in */
@@ -113,7 +113,7 @@ class SignIn extends \samson\core\CompressableExternalModule
 
                 $result .= m()->view('www/signin/pass_recovery_mailsend')->output();
                 s()->template('www/signin/signin_template.vphp');
-                m()->html($result)->title('Восстановление пароля');
+                m()->html($result)->title(t('Восстановление пароля', true));
             } else {
                 url()->redirect();
             }
@@ -132,7 +132,7 @@ class SignIn extends \samson\core\CompressableExternalModule
             $result = '';
             $result .= m()->view('www/signin/new_pass_form')->code($code)->output();
             s()->template('www/signin/signin_template.vphp');
-            m()->html($result)->title('Восстановление пароля');
+            m()->html($result)->title(t('Восстановление пароля', true));
         } else {
             e404();
         }
@@ -164,7 +164,7 @@ class SignIn extends \samson\core\CompressableExternalModule
                           ->message(t('Вы ввели некорректный пароль либо пароли не совпадают', true))
                           ->output();
             s()->template('www/signin/signin_template.vphp');
-            m()->html($result)->title('Ошибка восстановление пароля');
+            m()->html($result)->title(t('Ошибка восстановление пароля', true));
         }
     }
 }

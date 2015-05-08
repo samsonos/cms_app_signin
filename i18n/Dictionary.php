@@ -9,6 +9,7 @@ class Dictionary implements IDictionary
     {
         return array(
             "en"	=>array(
+                "Авторизация" => "Sign in",
                 "Запомнить меня" => "Remember me",
                 "Восстановление пароля" => "Recovery password",
                 "Отправить" => "Send",
@@ -25,6 +26,7 @@ class Dictionary implements IDictionary
                 "На введенный Вами email будет выслано сообщение с дальнейшими инструкциями." => "On your email will be sent a message with further instructions.",
             ),
             "ua"	=>array(
+                "Авторизация" => "",
                 "Запомнить меня" => "",
                 "Восстановление пароля" => "",
                 "Отправить" => "",

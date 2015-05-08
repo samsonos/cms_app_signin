@@ -46,7 +46,7 @@ function formSubm(){
         } else {
             preloader.hide();
             button.show();
-            document.location.href = "/cms";
+            document.location.href = s('#signin_redirect_url').val();
         }
     });
 }
