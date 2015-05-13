@@ -25,7 +25,7 @@
     <form class="signin-pages" method="post" action="<?php url_base('signin', 'mail') ?>">
         <fieldset>
             <h2><?php t('Восстановление пароля') ?></h2>
-            <input type="email" class="input-medium form-control recovery-email" placeholder="Введите Ваш Email" name="email" required>
+            <input type="email" class="input-medium form-control recovery-email" placeholder="<?php t('Введите Ваш Email') ?>" name="email" required>
             <span class="help-block recovery-msg"><?php t('На введенный Вами email будет выслано сообщение с дальнейшими инструкциями.') ?></span>
             <div class="recovery-btns">
                 <a class="btn btn-signin btn-back"><?php t('Вернуться') ?></a>
