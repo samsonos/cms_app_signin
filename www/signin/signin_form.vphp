@@ -17,7 +17,7 @@
         </label>
         <a class="passrecovery"><?php t('Восстановление пароля') ?></a>
         <div class="preloader_container"><div class="preloader"></div></div>
-        <button class="btn btn-lg btn-signin btn-block" type="submit"><?php t('Войти') ?></button>
+        <button name="btn-signin" class="btn btn-lg btn-signin btn-block" type="submit"><?php t('Войти') ?></button>
     </form>
 </div>
 
