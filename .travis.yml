@@ -1,0 +1,135 @@
+language: php
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+before_cache:
+  - sudo rm -f vendor/samson*
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+  #- 7
+
+env:
+  global:
+    - APPLICATION_ENV=travis
+
+matrix:
+  allow_failures:
+  - php: hhvm
+  - php: 7
+  - php: 5.6
+
+addons:
+  hosts:
+    - samsoncms.local
+
+mysql:
+  database: samsoncms
+  username: root
+  encoding: utf8
+
+before_script:
+  - sudo apt-get update
+
+  # install apache
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
+  - sudo a2enmod rewrite actions fastcgi alias
+
+  # install dependencies
+  - travis_retry composer install --prefer-source --no-interaction
+
+  # install SamsonCMS
+  - git clone http://github.com/samsoncms/cms www/cms
+  - cp -R vendor/. www/cms/vendor
+  - cd www/cms
+  - composer install --no-interaction
+  - cd ..
+  - cd ..
+
+  # configure apache for php-fpm
+  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm; fi
+  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then sudo cp -f ci/travis-apache-vhost /etc/apache2/sites-available/default; fi
+
+  # configure apache for hhvm
+  - if [ "$TRAVIS_PHP_VERSION" == "hhvm" ]; then sudo cp -f ci/travis-hhvm-vhost /etc/apache2/sites-available/default; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "hhvm" ]; then sudo hhvm -m daemon -vServer.Type=fastcgi -vServer.Port=9000 -vServer.FixPathInfo=true; fi
+
+  # rewrite path to www root folder
+  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+
+  # set application environment variable
+  - sudo sed -e "s?%APPLICATION_ENV%?$APPLICATION_ENV?g" --in-place /etc/apache2/sites-available/default
+  - sudo cat /etc/apache2/sites-available/default
+
+  # restart apache
+  - sudo service apache2 restart
+
+  # import base SQL data
+  - mysql -e 'create database samsoncms;'
+  #- mysql ${DB_NAME} < tests/sql/init.sql
+  - mysql -uroot -e "CREATE USER 'samsoncms'@'localhost' IDENTIFIED BY 'samsoncms'";
+  - mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'samsoncms'@'localhost' WITH GRANT OPTION";
+
+  # Start phantomjs
+  - phantomjs --webdriver=8643 &
+
+  # run migrations
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+  - wget http://samsoncms.local
+
+
+script:
+#- bin/phpunit --coverage-clover=coverage.clover --coverage-text
+ - vendor/bin/behat -p travis
+
+after_failure:
+  - sudo tail /var/log/apache2/error.log
+  - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then tail ~/.phpenv/versions/$(phpenv version-name)/var/log/php-fpm.log; fi
+
+after_script:
+ # send result to scrutinizer
+ - wget https://scrutinizer-ci.com/ocular.phar
+ - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+

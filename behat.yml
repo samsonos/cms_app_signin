@@ -1,0 +1,31 @@
+# behat.yml
+default:
+  translation:
+    locale: en
+  extensions:
+    Behat\MinkExtension:
+      sessions:
+        default:
+          selenium2:
+            browser: phantomjs
+            wd_host: "http://localhost:8643/wd/hub"
+
+travis:
+  extensions:
+      Behat\MinkExtension:
+        base_url: 'http://samsoncms.local'
+
+scrutinizer:
+  extensions:
+      Behat\MinkExtension:
+        base_url: 'http://samsoncms.local'
+
+local:
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'http://egorov.cms.local'
+
+firefox:
+    extensions:
+        Behat\MinkExtension:
+            browser_name: firefox

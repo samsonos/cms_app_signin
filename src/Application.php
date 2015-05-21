@@ -5,7 +5,7 @@
  * Date: 20.10.2014
  * Time: 11:43
  */
-namespace samson\cms\signin;
+namespace samsoncms\app\signin;
 use samson\social\email\EmailStatus;
 use samsonphp\event\Event;
 
@@ -13,9 +13,8 @@ use samsonphp\event\Event;
  * Generic class for user sign in
  * @author Olexandr Nazarenko <nazarenko@samsonos.com>
  * @copyright 2014 SamsonOS
- * @version 0.0.1
  */
-class SignIn extends \samson\core\CompressableExternalModule
+class Application extends \samson\core\CompressableExternalModule
 {
 
     public $id = 'signin';
@@ -25,10 +24,10 @@ class SignIn extends \samson\core\CompressableExternalModule
         if (!m('social')->authorized()) {
             if (!m('socialemail')->cookieVerification()) {
                 if (!url()->is('signin')) {
-                    url()->redirect('signin');
+                    url()->redirect('/signin');
                 }
             } else {
-                url()->redirect('signin');
+                url()->redirect('/signin');
             }
         } else {
             if (url()->is('signin')) {
@@ -46,7 +45,7 @@ class SignIn extends \samson\core\CompressableExternalModule
     /** Main sign in template */
     public function __base()
     {
-       // m('social')->prepare();
+        // m('social')->prepare();
         s()->template('www/signin/signin_template.vphp');
         $result = '';
         $result .= m()->view('www/signin/signin_form.vphp')->output();
@@ -145,7 +144,8 @@ class SignIn extends \samson\core\CompressableExternalModule
     public function __recovery($code)
     {
         if (isset($_POST['password']) && isset($_POST['confirm_password'])
-            && $_POST['password'] == $_POST['confirm_password']) {
+            && $_POST['password'] == $_POST['confirm_password']
+        ) {
             /** @var \samson\activerecord\user $user */
             $user = null;
             if (dbQuery('user')->confirmed($code)->first($user)) {
@@ -154,15 +154,16 @@ class SignIn extends \samson\core\CompressableExternalModule
                 $user->Password = $_POST['password'];
                 $user->save();
                 if (m('socialemail')->authorizeWithEmail($user->md5_email, $user->md5_password, $user)
-                                    ->code == EmailStatus::SUCCESS_EMAIL_AUTHORIZE) {
+                        ->code == EmailStatus::SUCCESS_EMAIL_AUTHORIZE
+                ) {
                     url()->redirect();
                 }
             }
         } else {
             $result = '';
             $result .= m()->view('www/signin/pass_error')
-                          ->message(t('Вы ввели некорректный пароль либо пароли не совпадают', true))
-                          ->output();
+                ->message(t('Вы ввели некорректный пароль либо пароли не совпадают', true))
+                ->output();
             s()->template('www/signin/signin_template.vphp');
             m()->html($result)->title(t('Ошибка восстановление пароля', true));
         }
