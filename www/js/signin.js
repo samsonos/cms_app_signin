@@ -73,7 +73,7 @@ function formShake(){
  */
 function list(){
 
-    var container = s('body.signin');
+    var container = s('body.signin .container');
 
     s('a.passrecovery').click(function(){
         container.left('100%');
