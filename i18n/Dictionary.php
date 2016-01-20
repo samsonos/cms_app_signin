@@ -8,7 +8,7 @@ class Dictionary implements IDictionary
     public function getDictionary()
     {
         return array(
-            "en"	=>array(
+            "en" => array(
                 "Авторизация" => "Sign in",
                 "Запомнить меня" => "Remember me",
                 "Восстановление пароля" => "Recovery password",
@@ -25,7 +25,7 @@ class Dictionary implements IDictionary
                 "В скором времени на указанную Вами почту придет письмо со ссылкой на восстановление пароля" => "In a short time you specified mail a letter with reference to the password recovery",
                 "На введенный Вами email будет выслано сообщение с дальнейшими инструкциями." => "On your email will be sent a message with further instructions.",
             ),
-            "ua"	=>array(
+            "ua" => array(
                 "Авторизация" => "",
                 "Запомнить меня" => "",
                 "Восстановление пароля" => "",

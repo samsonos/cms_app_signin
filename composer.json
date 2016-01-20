@@ -1,22 +1,29 @@
 {
-    "name":"samsonos/cms_app_signin",
-    "description":"SamsonCMS Sign In",
-    "author":"Olexandr Nazarenko <nazarenko@samsonos.com>",
-    "require":{        
-        "samsonos/php_core":"*",
-        "samsonos/php_activerecord":"*",
-        "samsonos/php_i18n":"*",
-        "samsonos/php_email":"*",
-        "samsonos/social_core":"*",
-        "samsonos/social_email":"*"
-    },
-	"minimum-stability":"dev",
-    "license":"Open Software License (OSL) v 3.0",
-    "homepage":"http://samsonos.com/",
-    "autoload": {
-        "classmap": ["src/"],
-        "psr-0": {
-            "samson\\cms\\signin": "src/"
-        }
+  "name": "samsonos/cms_app_signin",
+  "description": "SamsonCMS Sign In",
+  "author": "Olexandr Nazarenko <nazarenko@samsonos.com>",
+  "require": {
+    "samsoncms/application": "*",
+    "samsonos/php_email": "*",
+    "samsonos/social_core": "*",
+    "samsonos/social_email": "*"
+  },
+  "require-dev": {
+    "behat/behat": "3.*@stable",
+    "behat/mink": "1.6.*@stable",
+    "behat/mink-extension": "@stable",
+    "behat/mink-selenium2-driver": "@stable"
+  },
+  "minimum-stability": "dev",
+  "license": "Open Software License (OSL) v 3.0",
+  "homepage": "http://samsonos.com/",
+  "autoload": {
+    "classmap": ["src/"],
+    "psr-4": {
+      "samsoncms\\app\\signin": "src/"
     }
+  },
+  "config": {
+    "github-protocols": ["https"]
+  }
 }
