@@ -67,7 +67,6 @@ body.signin{
     max-width: 330px;
     margin: auto;
     position: relative;
-    left: 20px;
   }
 
   .form-recovery{
@@ -83,7 +82,6 @@ body.signin{
 
   form{
     position: relative;
-    left: -20px;
     font-family: "Tahoma";
     font-size: 13px;
     color: #000;
@@ -119,24 +117,26 @@ body.signin{
       transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     }
     label.checkbox{
-      margin-bottom: 10px;
       font-weight: normal;
       position: relative;
       min-height: 20px;
-      margin-top: 5px;
-      margin-left: 5px;
+      margin: 0 0 10px 0;
       max-width: 100%;
       font-family: "Tahoma";
       font-size: 13px;
       color: #000;
       display: inline-block;
+      vertical-align: top;
+      padding: 0 0 0 25px;
       input{
         position: absolute;
-        margin: -1px 0 0 -25px;
+        top: 0;
+        left: 0;
+        margin: 0;
         letter-spacing: normal;
         word-spacing: normal;
         text-transform: none;
-        text-indent: 0px;
+        text-indent: 0;
         text-shadow: none;
         display: inline-block;
         text-align: start;
@@ -147,8 +147,9 @@ body.signin{
     a{
       color: #428bca;
       display: inline-block;
+      vertical-align: top;
       float: right;
-      margin: 5px 0 10px;
+      margin: 0;
     }
     .btn-signin{
       background-color: #65c23a;
